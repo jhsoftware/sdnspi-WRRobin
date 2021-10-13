@@ -28,7 +28,7 @@ Partial Class OptionsUI
     Me.lstHosts = New System.Windows.Forms.ListView
     Me.colWeight = New System.Windows.Forms.ColumnHeader
     Me.colIP = New System.Windows.Forms.ColumnHeader
-    Me.ttl1 = New WRRobinPlugIn.ctlTTL
+    Me.ttl1 = New ctlTTL
     Me.SuspendLayout()
     '
     'Label1
@@ -150,7 +150,7 @@ Partial Class OptionsUI
   Friend WithEvents Label1 As System.Windows.Forms.Label
   Friend WithEvents txtName As System.Windows.Forms.TextBox
   Friend WithEvents Label3 As System.Windows.Forms.Label
-  Friend WithEvents ttl1 As WRRobinPlugIn.ctlTTL
+  Friend WithEvents ttl1 As ctlTTL
   Friend WithEvents btnAdd As System.Windows.Forms.Button
   Friend WithEvents btnEdit As System.Windows.Forms.Button
   Friend WithEvents btnRemove As System.Windows.Forms.Button

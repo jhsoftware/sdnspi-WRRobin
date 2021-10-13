@@ -84,12 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clConfig.vb" />
-    <Compile Include="ctlTTL.Designer.vb">
-      <DependentUpon>ctlTTL.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ctlTTL.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="frmHost.Designer.vb">
       <DependentUpon>frmHost.vb</DependentUpon>
     </Compile>
@@ -122,9 +116,6 @@
     <Compile Include="WRRobin.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ctlTTL.resx">
-      <DependentUpon>ctlTTL.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmHost.resx">
       <DependentUpon>frmHost.vb</DependentUpon>
     </EmbeddedResource>
