@@ -11,14 +11,14 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Weighted Round Robin Plug-In")> 
 <Assembly: AssemblyDescription("Weighted Round Robin Plug-In")> 
 <Assembly: AssemblyCompany("JH Software ApS")> 
-<Assembly: AssemblyProduct("Simple DNS Plus")> 
-<Assembly: AssemblyCopyright("Copyright ©  2008-2015 JH Software ApS")> 
+<Assembly: AssemblyProduct("Simple DNS Plus")>
+<Assembly: AssemblyCopyright("Copyright ©  2008-2021 JH Software ApS")>
 <Assembly: AssemblyTrademark("Simple DNS Plus")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("fde21929-f498-4aaa-8f5b-457adb04a29f")> 
+<Assembly: Guid("fde21929-f498-4aaa-8f5b-457adb04a29f")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -30,5 +30,5 @@ Imports System.Runtime.InteropServices
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
 
-<Assembly: AssemblyVersion("5.2.10.0")> 
-<Assembly: AssemblyFileVersion("5.2.10.0")> 
+<Assembly: AssemblyVersion("9.1.1.0")>
+<Assembly: AssemblyFileVersion("9.1.1.0")>

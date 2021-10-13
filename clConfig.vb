@@ -1,22 +1,22 @@
 ﻿Imports JHSoftware.SimpleDNS.Plugin
 
 Friend Class clConfig
-  Public Domain As DomainName
+  Public Domain As JHSoftware.SimpleDNS.DomName
   Public TTL As Integer
   Public Items As New List(Of WRRItem)
 
   Friend Class WRRItem
-    Friend IP As IPAddress
+    Friend IP As JHSoftware.SimpleDNS.SdnsIP
     Friend Weight As Integer
     Friend Hits As Integer
   End Class
 
-  Public Function HitMe(ByVal IPVersion As Integer) As IPAddress
+  Public Function HitMe(ByVal IPVersion As Integer) As JHSoftware.SimpleDNS.SdnsIP
     Dim load, MinLoad As Double
     Dim m As Integer = -1
     For i = 0 To Items.Count - 1
       With Items(i)
-        If .IP.ipversion <> IPVersion Then Continue For
+        If .IP.IPVersion <> IPVersion Then Continue For
         load = .Hits / .Weight
         If m = -1 OrElse load < MinLoad Then
           MinLoad = load
@@ -34,10 +34,10 @@ Friend Class clConfig
   Shared Function Load(ByVal config As String) As clConfig
     Dim sa = PipeDecode(config)
     Dim rv As New clConfig
-    rv.Domain = JHSoftware.SimpleDNS.Plugin.DomainName.Parse(sa(1))
+    rv.Domain = JHSoftware.SimpleDNS.DomName.Parse(sa(1))
     rv.TTL = Integer.Parse(sa(2))
     For i = 3 To sa.Length - 1 Step 2
-      rv.Items.Add(New WRRItem With {.Weight = Integer.Parse(sa(i)), .IP = IPAddress.Parse(sa(i + 1))})
+      rv.Items.Add(New WRRItem With {.Weight = Integer.Parse(sa(i)), .IP = JHSoftware.SimpleDNS.SdnsIP.Parse(sa(i + 1))})
     Next
     Return rv
   End Function

@@ -17,8 +17,8 @@
       MessageBox.Show("Host name is empty", "Weighted Round Robin", MessageBoxButtons.OK, MessageBoxIcon.Error)
       Return False
     End If
-    Dim d As JHSoftware.SimpleDNS.Plugin.DomainName
-    If Not JHSoftware.SimpleDNS.Plugin.DomainName.TryParse(txtName.Text.Trim, d) Then
+    Dim d As DomName
+    If Not DomName.TryParse(txtName.Text.Trim, d) Then
       MessageBox.Show("Invalid host name", "Weighted Round Robin", MessageBoxButtons.OK, MessageBoxIcon.Error)
       Return False
     End If
@@ -31,17 +31,16 @@
 
   Public Overrides Function SaveData() As String
     Dim cfg As New clConfig
-    cfg.Domain = JHSoftware.SimpleDNS.Plugin.DomainName.Parse(txtName.Text.Trim)
+    cfg.Domain = DomName.Parse(txtName.Text.Trim)
     cfg.TTL = ttl1.Value
     For Each itm As ListViewItem In lstHosts.Items
-      cfg.Items.Add(New clConfig.WRRItem With {.Weight = Integer.Parse(itm.Text), .IP = JHSoftware.SimpleDNS.Plugin.IPAddress.Parse(itm.SubItems(1).Text)})
+      cfg.Items.Add(New clConfig.WRRItem With {.Weight = Integer.Parse(itm.Text), .IP = SdnsIP.Parse(itm.SubItems(1).Text)})
     Next
     Return cfg.Save
   End Function
 
   Private Sub btnAdd_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAdd.Click
     Dim frm As New frmHost
-    frm.ctrlIP = GetIPCtrl.Invoke(True, True)
     AddHandler frm.FormClosing, AddressOf SubFormClosing
     NowAdding = True
     frm.ShowDialog()
@@ -50,10 +49,9 @@
   Private Sub btnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEdit.Click
     If lstHosts.SelectedIndices.Count = 0 Then Exit Sub
     Dim frm As New frmHost
-    frm.ctrlIP = GetIPCtrl.Invoke(True, True)
     AddHandler frm.FormClosing, AddressOf SubFormClosing
     frm.numWeight.Value = Integer.Parse(lstHosts.SelectedItems(0).Text)
-    frm.ctrlIP.Text = lstHosts.SelectedItems(0).SubItems(1).Text
+    frm.CtlIP1.Text = lstHosts.SelectedItems(0).SubItems(1).Text
     NowAdding = False
     frm.ShowDialog()
   End Sub
@@ -66,7 +64,7 @@
   Sub SubFormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs)
     Dim frm = DirectCast(sender, frmHost)
     If frm.DialogResult <> DialogResult.OK Then Exit Sub
-    Dim ip = System.Net.IPAddress.Parse(frm.ctrlIP.Text)
+    Dim ip = System.Net.IPAddress.Parse(frm.CtlIP1.Text)
     For i = 0 To lstHosts.Items.Count - 1
       If Not NowAdding AndAlso i = lstHosts.SelectedIndices(0) Then Continue For
       If System.Net.IPAddress.Parse(lstHosts.Items(i).SubItems(1).Text).Equals(ip) Then
