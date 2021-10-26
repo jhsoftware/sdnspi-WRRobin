@@ -26,15 +26,15 @@ Public Class WRRobin
 
 #Region "other methods"
 
-  Public Function GetPlugInTypeInfo() As JHSoftware.SimpleDNS.Plugin.IPlugInBase.PlugInTypeInfo Implements JHSoftware.SimpleDNS.Plugin.IPlugInBase.GetPlugInTypeInfo
+  Public Function GetPlugInTypeInfo() As JHSoftware.SimpleDNS.Plugin.IPlugInBase.PlugInTypeInfo Implements JHSoftware.SimpleDNS.Plugin.IPlugInBase.GetTypeInfo
     With GetPlugInTypeInfo
       .Name = "Weighted Round Robin"
       .Description = "Serves IP addresses round robin from a weighted list"
-      .InfoURL = "https://simpledns.plus/kb/190/weighted-round-robin-plug-in"
+      .InfoURL = "https://simpledns.plus/plugin-wrrobin"
     End With
   End Function
 
-  Public Function LookupHost(name As DomName, ipv6 As Boolean, req As IDNSRequest) As Task(Of LookupResult(Of SdnsIP)) Implements ILookupHost.LookupHost
+  Public Function LookupHost(name As DomName, ipv6 As Boolean, req As IRequestContext) As Task(Of LookupResult(Of SdnsIP)) Implements ILookupHost.LookupHost
     If name <> myConfig.Domain Then Return Task.FromResult(Of LookupResult(Of SdnsIP))(Nothing)
     Return Task.FromResult(New LookupResult(Of SdnsIP) With {.Value = myConfig.HitMe(If(ipv6, 6, 4)), .TTL = myConfig.TTL})
   End Function
